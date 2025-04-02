@@ -136,7 +136,7 @@ int main()
     Shortner shortner;
     auto settings = std::make_shared<restbed::Settings>();
     settings->set_port(8080);
-    settings->set_bind_address("127.0.0.1");
+    settings->set_bind_address("0.0.0.0");
     auto get_resource = std::make_shared<restbed::Resource>();
     auto post_resource = std::make_shared<restbed::Resource>();
     get_resource->set_path("/[a-zA-Z0-9]+");
