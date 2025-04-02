@@ -49,7 +49,6 @@ int main()
     Shortner& shortner = Shortner::GetInstance();
     const auto settings = std::make_shared<restbed::Settings>();
     settings->set_port(8080);
-    settings->set_bind_address("0.0.0.0");
     const auto getResource = std::make_shared<restbed::Resource>();
     const auto postResource = std::make_shared<restbed::Resource>();
     getResource->set_path("/[a-zA-Z0-9]+");
