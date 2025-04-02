@@ -110,15 +110,22 @@ void PostMethodHandler(const std::shared_ptr<restbed::Session>& session_,
                     });
 }
 
-void GetMetodHandler(const std::shared_ptr<restbed::Session> session_,
+void GetMetodHandler(const std::shared_ptr<restbed::Session>& session_,
                      Shortner& shortner_)
 {
     const auto request = session_->get_request();
-    std::string result = shortner_.Longen(request->get_path([](auto string_)
+    std::string result = "Error url requested not found";
+    try
     {
-        return string_.substr(1);
-    }));
-    session_->close(restbed::OK, result, {
+        result = shortner_.Longen(request->get_path([](auto string_)
+        {
+            return string_.substr(1);
+        }));
+    }
+    catch(...)
+    {
+    }
+    session_->close(restbed::NOT_FOUND, result, {
                         {"Content-Length", std::to_string(result.size())},
                         {"Connection", "close"}
                     });
